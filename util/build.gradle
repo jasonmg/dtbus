@@ -1,0 +1,69 @@
+group 'com.hawker'
+version '1.0'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "com.commercehub.gradle.plugin:gradle-avro-plugin:0.10.0"
+    }
+}
+apply plugin: "com.commercehub.gradle.plugin.avro"
+
+
+//configurations {
+//    compile.exclude group: "com.google.guava", module: "guava"
+//}
+
+dependencies {
+
+    compile("org.scala-lang:scala-library:2.11.11")
+    compile("org.scala-lang:scala-reflect:2.11.11")
+
+    compile("com.google.code.gson:gson:2.8.0")
+    compile("io.spray:spray-json_2.11:1.3.3")
+    compile("com.typesafe:config:1.2.1")
+
+    compile("com.alibaba:fastjson:1.1.41")
+
+    compile("org.apache.hbase:hbase-client:1.0.0")
+    compile("org.apache.hbase:hbase-common:1.0.0")
+    compile("org.apache.hbase:hbase-server:1.0.0")
+
+    compile("com.google.guava:guava:14.0.1")
+
+    // kafka
+    compile("org.apache.kafka:kafka_2.11:0.11.0.0")
+    compile("org.apache.kafka:kafka-clients:0.11.0.0")
+    // kafka serializer
+    compile("org.apache.avro:avro:1.8.1")
+
+    // http://julien-truffaut.github.io/Monocle/
+//    compile("com.github.julien-truffaut:monocle-core_2.11:1.4.0")
+//    compile("com.github.julien-truffaut:monocle-macro_2.11:1.4.0")
+//    compile("com.github.julien-truffaut:monocle-law:1.4.0:test")
+
+    compile("ch.qos.logback:logback-classic:1.2.3")
+    compile("org.apache.commons:commons-lang3:3.5")
+
+    // functional java
+    compile("org.functionaljava:functionaljava_1.8:4.7")
+    compile("org.functionaljava:functionaljava-java8:4.7")
+    compile("org.functionaljava:functionaljava-quickcheck:4.7")
+    compile("org.functionaljava:functionaljava-java-core:4.7")
+
+    // zip for java
+    compile("net.lingala.zip4j:zip4j:1.3.2")
+
+    // http client
+    compile("commons-httpclient:commons-httpclient:3.1")
+    compile("org.apache.httpcomponents:httpmime:4.3.1")
+
+    compile("joda-time:joda-time:2.9.7")
+
+    // https://squeryl.github.io/docs/0.9.5/introduction.html
+    compile('org.squeryl:squeryl_2.11:0.9.6-RC4')
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

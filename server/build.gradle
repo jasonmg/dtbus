@@ -1,0 +1,39 @@
+plugins {
+    id 'org.springframework.boot' version '1.5.4.RELEASE'
+}
+
+
+jar {
+    baseName = 'dtbus-server'
+    version =  '1.0'
+}
+
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile('org.springframework.boot:spring-boot-maven-plugin:1.5.4.RELEASE')
+    compile("org.springframework.boot:spring-boot-devtools")
+    compile('org.springframework.boot:spring-boot-starter-websocket')
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+
+
+    compile('org.springframework.kafka:spring-kafka:1.1.1.RELEASE')
+    compile('org.springframework.kafka:spring-kafka-test')
+    compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1")
+
+
+    compile("com.alibaba.otter:canal.client:1.0.24")
+    compile("mysql:mysql-connector-java:5.1.21")
+    compile("com.github.pagehelper:pagehelper-spring-boot-starter:1.1.2")
+    compile group: 'com.jayway.jsonpath', name: 'json-path', version: '2.2.0'
+
+    compile('org.functionaljava:functionaljava_1.8:4.7')
+    compile('org.functionaljava:functionaljava-java8:4.7')
+    compile('org.functionaljava:functionaljava-quickcheck:4.7')
+    compile('org.functionaljava:functionaljava-java-core:4.7')
+    compile group: 'ch.ethz.ganymed', name: 'ganymed-ssh2', version: '262'
+
+    compile group: 'org.jenkins-ci', name: 'trilead-ssh2', version: 'build-217-jenkins-11'
+
+    testCompile("org.springframework.boot:spring-boot-starter-test:1.5.4.RELEASE")
+}

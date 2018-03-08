@@ -1,0 +1,37 @@
+group 'com.hawker'
+version '1.0'
+
+
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Jar File Example',
+                'Implementation-Version': version
+//                'Main-Class': ''
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+dependencies {
+    compile project(":util")
+
+    compileOnly("org.apache.spark:spark-core_2.11:2.2.0")
+    compileOnly("org.apache.spark:spark-streaming_2.11:2.2.0")
+    compileOnly("org.apache.spark:spark-sql_2.11:2.2.0")
+//    compile("org.apache.spark:spark-core_2.11:2.2.0")
+//    compile("org.apache.spark:spark-streaming_2.11:2.2.0")
+//    compile("org.apache.spark:spark-sql_2.11:2.2.0")
+
+    compile("org.apache.spark:spark-streaming-kafka-0-10_2.11:2.0.0")
+
+    compile("org.apache.hbase:hbase-client:1.0.0")
+    compile("org.apache.hbase:hbase-common:1.0.0")
+    compile("org.apache.hbase:hbase-server:1.0.0")
+
+    compile("mysql:mysql-connector-java:5.1.21")
+
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

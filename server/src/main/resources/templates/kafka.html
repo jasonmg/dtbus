@@ -1,0 +1,94 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>广播式WebSocket</title>
+    <script th:src="@{js/sockjs.min.js}"></script>
+    <script th:src="@{js/stomp.js}"></script>
+    <script th:src="@{js/jquery-3.1.1.js}"></script>
+</head>
+<body onload="connect()">
+<noscript><h2 style="color: #e80b0a;">Sorry，浏览器不支持WebSocket</h2></noscript>
+<textarea id="chat-content" style="width:500px;height:300px;line-height: 16px"></textarea><br/>
+
+<script type="text/javascript">
+    var stompClient = null;
+
+    var uri = window.location.href;
+    console.log(uri);
+
+    var l = getLocation(uri);
+    var search = l.search;
+    var topic = search.substr(7);
+
+    function getLocation(href) {
+        var l = document.createElement("a");
+        l.href = href;
+        return l;
+    }
+
+
+    function connect() {
+
+        var socket = new SockJS('/endpointSang');
+        stompClient = Stomp.over(socket);
+
+        stompClient.connect({}, function (frame) {
+            console.log('Connected:' + frame);
+
+            var path = '/topic/getResponse/' + topic;
+            console.log(path);
+
+            stompClient.subscribe(path, function (response) {
+//                console.log(Object.prototype.toString.call(response));
+                console.log('call /topic/getResponse');
+                console.log(response.body, "body");
+
+                showResponse(response.body);
+            })
+        });
+
+
+        setTimeout(function () {
+            stompClient.send("/tail", {}, JSON.stringify({'topic': topic}));
+        }, 1000);
+    }
+
+    function disconnect() {
+
+        stompClient.send("/disconnect", {}, JSON.stringify({'topic': topic}));
+
+        if (stompClient != null) {
+            setTimeout(function () {
+                stompClient.disconnect();
+            }, 2000);
+        }
+        console.log('Disconnected');
+    }
+
+    function throttle(func, wait) {
+        clearTimeout(func.methodId);
+        func.methodId = setTimeout(func, wait)
+    }
+
+
+    // textarea 自动滚动
+    var a = 0;
+    var chatContent = document.querySelector('#chat-content')
+
+    function scroll() {
+        chatContent.scrollTop = a * 16;
+    }
+
+    function showResponse(message) {
+        chatContent.append(message + '\n');
+
+        if (chatContent.scrollHeight > 300) {
+            a++;
+        }
+        throttle(scroll, 500);
+    }
+
+
+</script>
+</body>
+</html>

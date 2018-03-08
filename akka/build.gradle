@@ -1,0 +1,64 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "com.commercehub.gradle.plugin:gradle-avro-plugin:0.10.0"
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version '1.5.4.RELEASE'
+}
+
+
+apply plugin: "com.commercehub.gradle.plugin.avro"
+
+
+
+group 'com.hawker'
+version '1.0'
+
+springBoot {
+    mainClass = "com.hawker.http.SampleWebApplication"
+}
+
+
+// 全局exclude jar
+//configurations {
+//    compile.exclude group: "com.google.guava", module: "guava"
+//}
+
+configurations.all {
+    // 强制规定一个jar的版本
+    resolutionStrategy {
+        force 'com.google.guava:guava:14.0.1'
+    }
+}
+
+dependencies {
+    compile project(":util")
+
+    // spring boot with akka-http (http://www.jianshu.com/p/74db588f700e)
+//    compile("com.github.scalaspring:akka-http-spring-boot_2.11:0.3.1")
+
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-devtools")
+    compile("org.springframework.boot:spring-boot-starter-tomcat")
+
+    compile ('org.springframework.cloud:spring-cloud-starter-eureka:1.3.5.RELEASE')
+
+    compile("com.typesafe.akka:akka-http_2.11:10.0.10")
+    compile("com.typesafe.akka:akka-http-spray-json_2.11:10.0.10")
+    compile("com.typesafe.scala-logging:scala-logging_2.11:3.5.0")
+
+    compile("com.typesafe.akka:akka-stream_2.11:2.5.4")
+    compile("com.typesafe.akka:akka-actor_2.11:2.5.4")
+    compile("com.typesafe.akka:akka-stream-kafka_2.11:0.17")
+
+    compile("org.apache.avro:avro:1.8.1")
+
+    compile("com.typesafe.akka:akka-cluster_2.11:2.5.4")
+    compile("com.typesafe.akka:akka-cluster-metrics_2.11:2.5.4")
+    
+}

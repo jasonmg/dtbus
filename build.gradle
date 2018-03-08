@@ -1,0 +1,27 @@
+group 'com.hawker'
+version '1.0'
+
+// 团队成员gradle环境一致性
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.0.1'
+}
+
+
+
+subprojects {
+
+    apply plugin: 'java'
+    apply plugin: 'scala'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
+    }
+
+
+
+
+
+}

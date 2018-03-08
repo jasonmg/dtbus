@@ -1,0 +1,8 @@
+rootProject.name = 'dtbus'
+include 'server'
+include 'engine'
+include 'akka'
+include 'util'
+include 'kstream'
+include 'recommend'
+

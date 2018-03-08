@@ -1,0 +1,28 @@
+{
+  "namespace": "com.hawker.entity.embed",
+  "type": "record",
+  "name": "JcyEmbed",
+  "fields": [
+    {"name": "sourceApp", "type": "string"},
+    {"name": "source", "type": "string"},
+    {"name": "channel", "type": "string"},
+    {"name": "versionCode", "type": "string"},
+    {"name": "sysVersion", "type": "string"},
+    {"name": "serverVersion", "type": "string"},
+    {"name": "CPU", "type": "string"},
+    {"name": "resolution", "type": "string"},
+    {"name": "language", "type": "string"},
+    {"name": "imei", "type": "string"},
+    {"name": "deviceName", "type": "string"},
+    {"name": "netType", "type": "string"},
+    {"name": "clientIp", "type": "string"},
+    {"name": "cityId", "type": "string"},
+    {"name": "wifiMac", "type": "string"},
+    {"name": "UUID", "type": "string"},
+    {"name": "userId", "type": "string"},
+    {"name": "eventId", "type": "string"},
+    {"name": "eventType", "type": "string"},
+    {"name": "logTime", "type": "string"},
+    {"name": "params", "type": "string"}
+  ]
+}
